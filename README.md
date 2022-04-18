@@ -15,3 +15,4 @@ The format of commands: prefix + command + any input (or arguments)
 3. deposit <amount to deposit> - works the opposite way of withdraw
 4. send <member to send to> <amount to send> - send money to another user (sent with bank money)
 5. slots <money to bet> - slots game
+6. buy, sell, bag, and shop
