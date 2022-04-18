@@ -167,21 +167,26 @@ async def slots(ctx, amount=None):
 
 @client.command()
 async def rob(ctx, member: discord.Member):
-    await open_account(ctx.author)
-    await open_account(member)
+    try:
+        await open_account(ctx.author)
+        await open_account(member)
 
-    bal = await update_bank(member)
+        bal = await update_bank(member)
 
-    if bal[0] < 5:
-        await ctx.send("It's not worth it!")
-        return
+        if bal[0] < 5:
+            await ctx.send("It's not worth it!")
+            return
 
-    earnings = random.randrange(0, bal[0])
+        earnings = random.randrange(0, bal[0])
 
-    await update_bank(ctx.author, earnings)
-    await update_bank(member, -1 * earnings)
+    
+        await update_bank(ctx.author, earnings)
+        await update_bank(member, -1 * earnings)
+    
+        await ctx.send(f"You robbed {earnings} coins from {member}!")
 
-    await ctx.send(f"You robbed {earnings} coins from {member}!")
+    except:
+        await ctx.send("One argument, the member, is missing!")
 
 
 @client.command()
