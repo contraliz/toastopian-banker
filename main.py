@@ -83,7 +83,18 @@ async def pay(ctx,user:discord.Member,amount=None):
         else:
             await ctx.send("You don't have senior role!")
     except:
-        await modrole(ctx)        
+        await modrole(ctx)
+        role = discord.utils.find(lambda r: r.name == 'senior', ctx.message.guild.roles)
+        auth = ctx.author
+        if role in auth.roles:
+            data = await get_bank_data()
+
+            earnings = int(amount)
+            await update_bank(user,earnings)
+            
+            await ctx.send(f"You have paid {user} {earnings} coins!")
+        else:
+            await ctx.send("You don't have senior role!")        
             
 @client.command()
 async def withdraw(ctx, amount=None):
@@ -216,8 +227,14 @@ async def rob(ctx, member: discord.Member):
     except:
         await ctx.send("One argument, the member, is missing!")
 
+@client.event
+async def on_command_error(ctx,error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is still on cooldown, please try again in {:.2f} seconds'.format(error.retry_after)
+        await ctx.send(msg)
 
 @client.command()
+@commands.cooldown(2,30,commands.BucketType.user)
 async def heist(ctx, member: discord.Member):
     try:
         await open_account(ctx.author)
