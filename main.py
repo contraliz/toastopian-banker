@@ -4,6 +4,7 @@ import json
 import os
 import random
 from keep_alive import keep_alive
+from discord.utils import get
 
 client = commands.Bot(command_prefix='e!')
 
@@ -58,6 +59,32 @@ async def gross(ctx, earn=None):
         json.dump(users, f)
 
 
+@client.command()
+async def modrole(ctx):
+    if get(ctx.guild.roles, name="senior"):
+        await ctx.send("exception sucess, role created")
+        print("001")
+    else:
+        await ctx.guild.create_role(name="senior", colour=discord.Colour(0x0062ff))
+        print("Role created")
+
+@client.command()
+async def pay(ctx,user:discord.Member,amount=None):
+    try:
+        role = discord.utils.find(lambda r: r.name == 'senior', ctx.message.guild.roles)
+        auth = ctx.author
+        if role in auth.roles:
+            data = await get_bank_data()
+
+            earnings = int(amount)
+            await update_bank(user,earnings)
+            
+            await ctx.send(f"You have paid {user} {earnings} coins!")
+        else:
+            await ctx.send("You don't have senior role!")
+    except:
+        await modrole(ctx)        
+            
 @client.command()
 async def withdraw(ctx, amount=None):
     await open_account(ctx.author)
@@ -178,7 +205,7 @@ async def rob(ctx, member: discord.Member):
             await ctx.send("It's not worth it!")
             return
 
-        earnings = random.randrange(0, bal[0])
+        earnings = random.randrange(0, round(int(bal[0] * 0.75)))
 
         await update_bank(ctx.author, earnings)
         await update_bank(member, -1 * earnings)
@@ -206,7 +233,7 @@ async def heist(ctx, member: discord.Member):
         if pos == dos:
             await ctx.send("You broke into the bank!")
 
-            earnings = random.randrange(0, bal[1])
+            earnings = random.randrange(0, round(int(bal[1] * 0.75)))
             earnings = int(earnings)
 
             await update_bank(ctx.author, earnings)
@@ -217,7 +244,7 @@ async def heist(ctx, member: discord.Member):
             await ctx.send("Your attempt was unsuccessful!")
 
     except:
-        ctx.send("An error has occured!")
+        await ctx.send("An error has occured!")
 
 
 @client.command()
