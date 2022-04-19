@@ -5,15 +5,15 @@ import os
 import random
 from keep_alive import keep_alive
 
-client = commands.Bot(command_prefix="e!")
+client = commands.Bot(command_prefix='e!')
 
 mainshop = [{
     "name": "Tavern-Table",
     "price": 25,
-    "description": "A table at the tavern, for 10 days!"
+    "description": "A table at the tavern, for 3 days!"
 }, {
     "name": "Bank-security",
-    "price": 50,
+    "price": 100,
     "description": "10 more security points!"
 }]
 
@@ -31,13 +31,14 @@ async def balance(ctx):
     user = ctx.author
     users = await get_bank_data()
 
-    wallet_amt = users[str(user.id)]["wallet"]
-    bank_amt = users[str(user.id)]["bank"]
+    wallet_amt = round(users[str(user.id)]["wallet"])
+    bank_amt = round(users[str(user.id)]["bank"])
 
     em = discord.Embed(title=f"{ctx.author.name}'s balance",
                        color=discord.Color.blue())
     em.add_field(name="Wallet balance", value=wallet_amt)
     em.add_field(name="Bank balance", value=bank_amt)
+
     await ctx.send(embed=em)
 
 
@@ -67,8 +68,8 @@ async def withdraw(ctx, amount=None):
 
     bal = await update_bank(ctx.author)
 
-    amount = round(float(amount),2)
-    
+    amount = round(int(amount))
+
     if amount > bal[1]:
         await ctx.send("You don't have that much money!")
         return
@@ -92,8 +93,8 @@ async def deposit(ctx, amount=None):
 
     bal = await update_bank(ctx.author)
 
-    amount = round(float(amount),2)
-    
+    amount = round(int(amount))
+
     if amount > bal[0]:
         await ctx.send("You don't have that much money!")
         return
@@ -118,7 +119,7 @@ async def send(ctx, member: discord.Member, amount=None):
 
     bal = await update_bank(ctx.author)
 
-    amount = round(float(amount),2)
+    amount = int(amount)
     if amount > bal[1]:
         await ctx.send("You don't have that much money!")
         return
@@ -142,7 +143,7 @@ async def slots(ctx, amount=None):
 
     bal = await update_bank(ctx.author)
 
-    amount = round(float(amount),2)
+    amount = round(float(amount), 2)
     if amount > bal[0]:
         await ctx.send("You don't have that much money!")
         return
@@ -158,10 +159,10 @@ async def slots(ctx, amount=None):
     await ctx.send(str(final))
 
     if final[0] == final[2] or final[0] == final[1] and final[0] == final[2]:
-        await update_bank(ctx.author, 2 * amount)
+        await update_bank(ctx.author, int(2 * amount))
         await ctx.send("You won!")
     else:
-        await update_bank(ctx.author, -1 * amount)
+        await update_bank(ctx.author, int(-1 * amount))
         await ctx.send("You lost!")
 
 
@@ -179,10 +180,10 @@ async def rob(ctx, member: discord.Member):
 
         earnings = random.randrange(0, bal[0])
 
-    
         await update_bank(ctx.author, earnings)
         await update_bank(member, -1 * earnings)
-    
+        earnings = int(earnings)
+
         await ctx.send(f"You robbed {earnings} coins from {member}!")
 
     except:
@@ -191,27 +192,32 @@ async def rob(ctx, member: discord.Member):
 
 @client.command()
 async def heist(ctx, member: discord.Member):
-    await open_account(ctx.author)
-    await open_account(member)
+    try:
+        await open_account(ctx.author)
+        await open_account(member)
 
-    bal = await update_bank(member)
-    pos = random.randrange(0, bal[2] / 2)
-    dos = random.randrange(0, bal[2] / 2)
-    print(pos, dos)
-    await ctx.send("You attempted to break into the bank...")
-    print('command exe')
+        bal = await update_bank(member)
+        pos = random.randrange(0, bal[2] / 2)
+        dos = random.randrange(0, bal[2] / 2)
+        print(pos, dos)
+        await ctx.send("You attempted to break into the bank...")
+        print('command exe')
 
-    if pos == dos:
-        await ctx.send("You broke into the bank!")
+        if pos == dos:
+            await ctx.send("You broke into the bank!")
 
-        earnings = random.randrange(0, bal[1])
+            earnings = random.randrange(0, bal[1])
+            earnings = int(earnings)
 
-        await update_bank(ctx.author, earnings)
-        await update_bank(member, -1 * earnings)
+            await update_bank(ctx.author, earnings)
+            await update_bank(member, -1 * earnings)
 
-        await ctx.send(f"You robbed {earnings} coins from {member}!")
-    else:
-        await ctx.send("Your attempt was unsuccessful!")
+            await ctx.send(f"You robbed {earnings} coins from {member}!")
+        else:
+            await ctx.send("Your attempt was unsuccessful!")
+
+    except:
+        ctx.send("An error has occured!")
 
 
 @client.command()
@@ -354,7 +360,7 @@ async def sell_this(user, item_name, amount, price=None):
         if name == item_name:
             name_ = name
             if price == None:
-                price = 0.9 * item["price"]
+                price = round(0.8 * item["price"])
             break
 
     if name_ == None:
@@ -434,4 +440,4 @@ async def update_bank(user, change=0, mode="wallet"):
 
 
 keep_alive()
-client.run(os.getenv('TOKEN'))
+client.run(os.getenv('TOKEN-1'))
