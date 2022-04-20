@@ -26,3 +26,15 @@ The format of commands: prefix + command + any input (or arguments)
 8. heist <member to heist from> - steal money from the member's bank account 
 9. rob <member to heist from> - steal money from the member's wallet account 
 10. pay <member to pay for> - money you get for a job
+
+
+# Shop items:
+There are a lot of things in the shop you can buy
+  
+1. tavern table - a table at the tavern for 3 days! - $25
+2. bank security - 10 more security points that protects your bank! - $100
+3. toast - some freshly baked toast - $3
+4. beer - tasty beer for you to enjoy - $2
+5. apartment room - a place where you can live - $150
+6. huge mansion - gives you a place in the town - $500
+7. something you can't buy - try to buy this😂 - $0 
