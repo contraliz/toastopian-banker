@@ -8,7 +8,7 @@ The new dunctions of the Toastopian banker is that you can SELL the possessions 
   
   Shops provide everything you need in Toastopia from bank security points to huge dream mansions. A tavern-table is a table at the tavern for 3 days, and it only costs 25 coins! The beer only costs you 2 coins, and gives you a feeling of relaxation and pleasure! Ever being concerned about the bank money you deposited? The bank security points got that for you, it prevents you bank from being heisted and robbed, and only sets you back for 100 coins! You can buy an apartment for only 150 coins and a huge mansion for 500 coins and complete your dreams! When you are hungry, never think of disgusting can food, we got our own freshly baked toasts that just came out of the factory. Over at Toastopis, toasts are their special. Unlike other toasts, this is hand-made and has a secret formula of making and it is only 3 bucks! If you really insist, you can buy nothing for 0 coins, for practice or running commands!
   
-  Eventhough gambling is not allowed in China, it is allowed in Toastopia. The user can gamble the amount they wanted, if they win, they get double the amount they bet for, if they lose, they lose the money. You can simply access to gambling by e!slots and enter the amount you want to gamble! You can get rich and buy whatever you want in the shop!
+  Gambling is allowed in Toastopia. The user can gamble the amount they wanted, if they win, they get double the amount they bet for, if they lose, they lose the money. You can simply access to gambling by e!slots and enter the amount you want to gamble! You can get rich and buy whatever you want in the shop!
 
 
 # Cheat sheet for commands:
