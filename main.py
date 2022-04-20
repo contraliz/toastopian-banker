@@ -9,13 +9,33 @@ from discord.utils import get
 client = commands.Bot(command_prefix='e!')
 
 mainshop = [{
-    "name": "Tavern-Table",
+    "name": "tavern-Table",
     "price": 25,
     "description": "A table at the tavern, for 3 days!"
 }, {
-    "name": "Bank-security",
+    "name": "bank-security",
     "price": 100,
     "description": "10 more security points!"
+}, {
+    "name": "toast",
+    "price": 3,
+    "description": "Some freshly baked toast"
+}, {
+    "name": "beer",
+    "price": 2,
+    "description": "Tasty beer for you to enjoy"
+}, {
+    "name": "apartment-room",
+    "price": 150,
+    "description": "A place where you can live"
+}, {
+    "name": "huge-mansion",
+    "price": 500,
+    "description": "Gives your house a place in this town"
+}, {
+    "name": "something you can't buy",
+    "price": 0,
+    "description": "Try to buy this"  
 }]
 
 
@@ -42,6 +62,19 @@ async def balance(ctx):
 
     await ctx.send(embed=em)
 
+@client.command()
+async def sec(ctx):
+    print(1)
+    await open_account(ctx.author)
+    user = ctx.author
+    users = await get_bank_data()
+    print(ctx.author, "checked the security")
+
+    sec = round(users[str(user.id)]["sec"])
+    print(sec)
+
+    await ctx.send(f"You have {sec} security points")
+    
 
 @client.command()
 async def gross(ctx, earn=None):
@@ -65,37 +98,42 @@ async def modrole(ctx):
         await ctx.send("exception sucess, role created")
         print("001")
     else:
-        await ctx.guild.create_role(name="senior", colour=discord.Colour(0x0062ff))
+        await ctx.guild.create_role(name="senior",
+                                    colour=discord.Colour(0x0062ff))
         print("Role created")
 
+
 @client.command()
-async def pay(ctx,user:discord.Member,amount=None):
+async def pay(ctx, user: discord.Member, amount=None):
     try:
-        role = discord.utils.find(lambda r: r.name == 'senior', ctx.message.guild.roles)
+        role = discord.utils.find(lambda r: r.name == 'senior',
+                                  ctx.message.guild.roles)
         auth = ctx.author
         if role in auth.roles:
             data = await get_bank_data()
 
             earnings = int(amount)
-            await update_bank(user,earnings)
-            
+            await update_bank(user, earnings)
+
             await ctx.send(f"You have paid {user} {earnings} coins!")
         else:
             await ctx.send("You don't have senior role!")
     except:
         await modrole(ctx)
-        role = discord.utils.find(lambda r: r.name == 'senior', ctx.message.guild.roles)
+        role = discord.utils.find(lambda r: r.name == 'senior',
+                                  ctx.message.guild.roles)
         auth = ctx.author
         if role in auth.roles:
             data = await get_bank_data()
 
             earnings = int(amount)
-            await update_bank(user,earnings)
-            
+            await update_bank(user, earnings)
+
             await ctx.send(f"You have paid {user} {earnings} coins!")
         else:
-            await ctx.send("You don't have senior role!")        
-            
+            await ctx.send("You don't have senior role!")
+
+
 @client.command()
 async def withdraw(ctx, amount=None):
     await open_account(ctx.author)
@@ -227,14 +265,17 @@ async def rob(ctx, member: discord.Member):
     except:
         await ctx.send("One argument, the member, is missing!")
 
+
 @client.event
-async def on_command_error(ctx,error):
+async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
-        msg = 'This command is still on cooldown, please try again in {:.2f} seconds'.format(error.retry_after)
+        msg = 'This command is still on cooldown, please try again in {:.2f} seconds'.format(
+            error.retry_after)
         await ctx.send(msg)
 
+
 @client.command()
-@commands.cooldown(2,30,commands.BucketType.user)
+@commands.cooldown(2, 30, commands.BucketType.user)
 async def heist(ctx, member: discord.Member):
     try:
         await open_account(ctx.author)
@@ -297,9 +338,16 @@ async def buy(ctx, item, amount=1):
             await ctx.send(f"You just bought {amount} {item}")
         if res[1] == 1:
             secure = 10 * amount
+
             print(secure)
             await update_bank(ctx.author, secure, "sec")
             new_bal = await update_bank(ctx.author)
+
+            dict_bk = mainshop[1]
+            price_bk = dict_bk["price"]
+
+            await update_bank(ctx.author, price_bk * amount * -1)
+
             await ctx.send(f"You just bought {secure} bank security points!")
             await ctx.send(f"You now have {new_bal[2]} bank security points")
 
@@ -484,4 +532,4 @@ async def update_bank(user, change=0, mode="wallet"):
 
 
 keep_alive()
-client.run(os.getenv('TOKEN-1'))
+client.run(os.getenv('TOKEN'))
