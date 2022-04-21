@@ -11,6 +11,10 @@
     "price": 3,
     "description": "Some freshly baked toast"
 }, {
+    "name": "sweet-jam",
+    "price": 1,
+    "description": "Pairs great with toast"
+}, {
     "name": "beer",
     "price": 2,
     "description": "Tasty beer for you to enjoy"
@@ -23,14 +27,6 @@
     "price": 500,
     "description": "Gives your house a place in this town"
 }, {
-    "name": "something you can't buy",
-    "price": 0,
-    "description": "Try to buy this"  
-}, {
-    "name": "sweet-jam",
-    "price": 1,
-    "description": "Pairs really good with toast"
-}, {
     "name": "Phone",
     "price": 20,
     "description": "The brand new phone"
@@ -42,4 +38,9 @@
     "name": "house",
     "price": 250,
     "description": "A place for you to live that is smaller than a mansion"
+}, {
+    "name": "something you can't buy",
+    "price": 0,
+    "description": "Try to buy this"  
+
 }}
