@@ -36,6 +36,14 @@ mainshop = [{
     "name": "something you can't buy",
     "price": 0,
     "description": "Try to buy this"  
+}, {
+    "name": "sweet jam",
+    "price": 1,
+    "description": "Pairs really good with toast"
+}, {
+    "name": "Phone",
+    "price": 20,
+    "description": "The brand new iPhone 14 Pro Max"
 }]
 
 
