@@ -1,0 +1,45 @@
+{{
+    "name": "tavern-Table",
+    "price": 25,
+    "description": "A table at the tavern, for 3 days!"
+}, {
+    "name": "bank-security",
+    "price": 100,
+    "description": "10 more security points!"
+}, {
+    "name": "toast",
+    "price": 3,
+    "description": "Some freshly baked toast"
+}, {
+    "name": "beer",
+    "price": 2,
+    "description": "Tasty beer for you to enjoy"
+}, {
+    "name": "apartment-room",
+    "price": 150,
+    "description": "A place where you can live"
+}, {
+    "name": "huge-mansion",
+    "price": 500,
+    "description": "Gives your house a place in this town"
+}, {
+    "name": "something you can't buy",
+    "price": 0,
+    "description": "Try to buy this"  
+}, {
+    "name": "sweet-jam",
+    "price": 1,
+    "description": "Pairs really good with toast"
+}, {
+    "name": "Phone",
+    "price": 20,
+    "description": "The brand new phone"
+}, {
+    "name": "ticket",
+    "price": 100,
+    "description": "ticket to visit the brand new museum!"
+}, {
+    "name": "house",
+    "price": 250,
+    "description": "A place for you to live that is smaller than a mansion"
+}}

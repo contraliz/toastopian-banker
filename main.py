@@ -54,7 +54,6 @@ mainshop = [{
     "description": "A place for you to live that is smaller than a mansion"
 }]
 
-
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Activity(
