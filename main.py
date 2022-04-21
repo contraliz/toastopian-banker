@@ -89,23 +89,6 @@ async def sec(ctx):
     print(sec)
 
     await ctx.send(f"You have {sec} security points")
-    
-
-@client.command()
-async def gross(ctx, earn=None):
-    await open_account(ctx.author)
-    user = ctx.author
-    users = await get_bank_data()
-
-    earnings = int(earn)
-
-    await ctx.send(f"You earned {earnings} coins!")
-
-    users[str(user.id)]["wallet"] += earnings
-
-    with open("bank.json", "w") as f:
-        json.dump(users, f)
-
 
 @client.command()
 async def modrole(ctx):
