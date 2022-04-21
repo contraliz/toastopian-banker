@@ -43,7 +43,7 @@ mainshop = [{
 }, {
     "name": "Phone",
     "price": 20,
-    "description": "The brand new iPhone 14 Pro Max"
+    "description": "The brand new phone"
 }]
 
 
