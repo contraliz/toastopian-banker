@@ -37,13 +37,21 @@ mainshop = [{
     "price": 0,
     "description": "Try to buy this"  
 }, {
-    "name": "sweet jam",
+    "name": "sweet-jam",
     "price": 1,
     "description": "Pairs really good with toast"
 }, {
     "name": "Phone",
     "price": 20,
     "description": "The brand new phone"
+}, {
+    "name": "ticket",
+    "price": 100,
+    "description": "ticket to visit the brand new museum!"
+}, {
+    "name": "house",
+    "price": 250,
+    "description": "A place for you to live that is smaller than a mansion"
 }]
 
 
